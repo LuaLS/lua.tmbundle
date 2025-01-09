@@ -292,7 +292,7 @@
 					"name": "string.quoted.double.lua"
 				},
 				{
-					"begin": "(?<=\\.cdef)\\s*(\\[(=*)\\[)",
+					"begin": "(?<=\\.cdef)\\s*(\\(?\\[(=*)\\[)",
 					"beginCaptures": {
 						"0": {
 							"name": "string.quoted.other.multiline.lua"
@@ -302,7 +302,7 @@
 						}
 					},
 					"contentName": "meta.embedded.lua",
-					"end": "(\\]\\2\\])[ \\t]*",
+					"end": "(\\]\\2\\]\\)?)[ \\t]*",
 					"endCaptures": {
 						"0": {
 							"name": "string.quoted.other.multiline.lua"
