@@ -46,7 +46,7 @@
               </dict>
             </dict>
             <key>end</key>
-            <string>(\))|(?=[\-\.{}\[\]"'])</string>
+            <string>(\))|(?=[\-{}\[\]"'])|(?&lt;!\.)\.(?!\.)</string>
             <key>endCaptures</key>
             <dict>
               <key>1</key>
@@ -62,6 +62,23 @@
               <dict>
                 <key>include</key>
                 <string>#comment</string>
+              </dict>
+              <dict>
+                <key>match</key>
+                <string>(\.{3})\s*([a-zA-Z_][a-zA-Z0-9_]*)</string>
+                <key>captures</key>
+                <dict>
+                  <key>1</key>
+                  <dict>
+                    <key>name</key>
+                    <string>constant.language.lua</string>
+                  </dict>
+                  <key>2</key>
+                  <dict>
+                    <key>name</key>
+                    <string>variable.parameter.function.lua</string>
+                  </dict>
+                </dict>
               </dict>
               <dict>
                 <key>match</key>
@@ -238,6 +255,18 @@
       </dict>
       <dict>
         <key>match</key>
+        <string>^\s*(global)\b(?!\s*=)</string>
+        <key>captures</key>
+        <dict>
+          <key>1</key>
+          <dict>
+            <key>name</key>
+            <string>keyword.global.lua</string>
+          </dict>
+        </dict>
+      </dict>
+      <dict>
+        <key>match</key>
         <string>\b(function)\b(?![,:])</string>
         <key>name</key>
         <string>keyword.control.lua</string>
@@ -268,15 +297,21 @@
       </dict>
       <dict>
         <key>match</key>
-        <string>(?&lt;![^.]\.|:)\b(coroutine\.(create|isyieldable|close|resume|running|status|wrap|yield)|string\.(byte|char|dump|find|format|gmatch|gsub|len|lower|match|pack|packsize|rep|reverse|sub|unpack|upper)|table\.(concat|insert|maxn|move|pack|remove|sort|unpack)|math\.(abs|acos|asin|atan2?|ceil|cosh?|deg|exp|floor|fmod|frexp|ldexp|log|log10|max|min|modf|pow|rad|random|randomseed|sinh?|sqrt|tanh?|tointeger|type)|io\.(close|flush|input|lines|open|output|popen|read|tmpfile|type|write)|os\.(clock|date|difftime|execute|exit|getenv|remove|rename|setlocale|time|tmpname)|package\.(loadlib|seeall|searchpath)|debug\.(debug|[gs]etfenv|[gs]ethook|getinfo|[gs]etlocal|[gs]etmetatable|getregistry|[gs]etupvalue|[gs]etuservalue|set[Cc]stacklimit|traceback|upvalueid|upvaluejoin)|bit32\.(arshift|band|bnot|bor|btest|bxor|extract|replace|lrotate|lshift|rrotate|rshift)|utf8\.(char|codes|codepoint|len|offset))\b(?!\s*=(?!=))</string>
+        <string>(?&lt;![^.]\.|:)\b(coroutine\.(create|isyieldable|close|resume|running|status|wrap|yield)|string\.(byte|char|dump|find|format|gmatch|gsub|len|lower|match|pack|packsize|rep|reverse|sub|unpack|upper)|table\.(concat|create|insert|maxn|move|pack|remove|sort|unpack)|math\.(abs|acos|asin|atan2?|ceil|cosh?|deg|exp|floor|fmod|frexp|ldexp|log|log10|max|min|modf|pow|rad|random|randomseed|sinh?|sqrt|tanh?|tointeger|type)|io\.(close|flush|input|lines|open|output|popen|read|tmpfile|type|write)|os\.(clock|date|difftime|execute|exit|getenv|remove|rename|setlocale|time|tmpname)|package\.(loadlib|seeall|searchpath)|debug\.(debug|[gs]etfenv|[gs]ethook|getinfo|[gs]etlocal|[gs]etmetatable|getregistry|[gs]etupvalue|[gs]etuservalue|set[Cc]stacklimit|traceback|upvalueid|upvaluejoin)|bit32\.(arshift|band|bnot|bor|btest|bxor|extract|replace|lrotate|lshift|rrotate|rshift)|utf8\.(char|codes|codepoint|len|offset))\b(?!\s*=(?!=))</string>
         <key>name</key>
         <string>support.function.library.lua</string>
       </dict>
       <dict>
         <key>match</key>
-        <string>\b(and|or|not|\|\||\&amp;\&amp;|\!)\b</string>
+        <string>\b(\|\||\&amp;\&amp;|\!)\b</string>
         <key>name</key>
         <string>keyword.operator.lua</string>
+      </dict>
+      <dict>
+        <key>match</key>
+        <string>\b(and|or|not)\b</string>
+        <key>name</key>
+        <string>keyword.operator.logical.lua</string>
       </dict>
       <dict>
         <key>match</key>
@@ -1374,13 +1409,13 @@
             <array>
               <dict>
                 <key>match</key>
-                <string>[\(\),:\?][ \t]*</string>
+                <string>[\(\),\:\?\[\]\&lt;\&gt;\,][ \t]*</string>
                 <key>name</key>
                 <string>keyword.operator.lua</string>
               </dict>
               <dict>
                 <key>match</key>
-                <string>([a-zA-Z_][a-zA-Z0-9_\.\*\[\]\&lt;\&gt;\,\-]*)(?&lt;!,)[ \t]*(?=\??:)</string>
+                <string>([a-zA-Z_][a-zA-Z0-9_\.\*\-]*)(?&lt;!,)[ \t]*(?=\??:)</string>
                 <key>name</key>
                 <string>entity.name.variable.lua</string>
               </dict>
