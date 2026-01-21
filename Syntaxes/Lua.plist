@@ -486,7 +486,7 @@
           </dict>
           <dict>
             <key>begin</key>
-            <string>(?&lt;=\.cdef)\s*(\[(=*)\[)</string>
+            <string>(?&lt;=\.cdef)\s*(\(?\[(=*)\[)</string>
             <key>beginCaptures</key>
             <dict>
               <key>0</key>
@@ -503,7 +503,7 @@
             <key>contentName</key>
             <string>meta.embedded.lua</string>
             <key>end</key>
-            <string>(\]\2\])[ \t]*</string>
+            <string>(\]\2\]\)?)[ \t]*</string>
             <key>endCaptures</key>
             <dict>
               <key>0</key>
